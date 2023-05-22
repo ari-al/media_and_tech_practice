@@ -82,23 +82,37 @@ def mousePressed():
         button_action=PAUSE
     else:
         button_action=PLAY
-        
+
+prev_x = 0
+current_x = 0        
 def mouseDragged():
     global button_action
     global moon_deg, sun_deg, speed
-    if sun_deg < 360:
-        sun_deg=sun_deg+speed
-    else:
-        sun_deg=0
-    if moon_deg < 360:
-        moon_deg=moon_deg+speed
-    else:
-        moon_deg=0
+    dx = mouseX - pmouseX
+    dy = mouseY - pmouseY
+    if dx > 0:
+        if sun_deg < 360:
+            sun_deg=sun_deg+speed
+        else:
+            sun_deg=0
+        if moon_deg < 360:
+            moon_deg=moon_deg+speed
+        else:
+            moon_deg=0
+    elif dx < 0:
+        if sun_deg > 0:
+            sun_deg=sun_deg-speed
+        else:
+            sun_deg=360
+        if moon_deg > 0:
+            moon_deg=moon_deg-speed
+        else:
+            moon_deg=360
     
 def mouseReleased():
     global button_action, PLAY
     button_action=PLAY
-    
+        
 
 def clickButton(x,y):
     correction = 115
